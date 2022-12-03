@@ -62,10 +62,7 @@ public:
 	glm::vec3 refind_objExtent();
 	void delete_model();
 	void get_face_data(map<int, map<int, map<int, int> > > &v_table, vector<vector<int> > fd, vector <glm::vec3> v, vector <glm::vec2> vt, vector <glm::vec3> vn);
-	void vertex_table(vector <glm::vec3> p, vector <glm::vec2> t, vector <glm::vec3> n);
 	// ---------------------------------------------------------------------------
-	vector <vector<vector<short> > > v_table_3d;
-	vector <int> v_table_1d;
 private:
 	// TriangleMesh Private Methods.
 	// ---------------------------------------------------------------------------

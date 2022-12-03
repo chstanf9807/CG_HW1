@@ -96,73 +96,7 @@ void TriangleMesh::get_face_data(map<int, map<int, map<int, int> > > &v_table, v
 			vertexIndices.push_back(indx);
 			indx++;
 		}
-
-		//cout << "(p, t, n) = (" << p << ", " << t << ", " << n << ")\n";
-		//if (v_table_1d[p] == -1)
-		//{
-		//	v_table_1d[p] = indx;
-		//	cout << "indx = " << indx << endl;
-		//	tmp.position = v[p];
-		//	tmp.texcoord = vt[t];
-		//	tmp.normal = vn[n];
-		//	vertices.push_back(tmp);
-		//	vertexIndices.push_back(indx);
-		//	indx++;
-		//}
-		//else
-		//{
-		//	vertexIndices.push_back(v_table_1d[p]);
-		//}
-		//index = p * (vt.size()*vn.size()) + t*(vn.size()) + n;
-		//vertexIndices.push_back(index);
 	}
-}
-
-int get_f_p(string fd) {
-	int count = 0;
-	for (int i = 0; i < fd.length(); i++)
-	{
-		if (fd[i] == '/') break;
-		count++;
-	}
-	int point = 0;
-	if (fd[0] == '-') fd[0] = '0';
-	for (int i = 0; i < count; i++)
-		point = point * 10 + (fd[i] - '0');
-	return point;
-}
-
-void TriangleMesh::vertex_table(vector <vec3> p, vector <vec2> t, vector <vec3> n) {
-	VertexPTN ver;
-	cout << "p = " << p.size() << endl;
-	cout << "t = " << t.size() << endl;
-	cout << "n = " << n.size() << endl;
-	cout << "size = " << p.size() * t.size() * n.size() << endl;
-	vertices.resize(p.size() * t.size() * n.size());
-	int count = 0;
-	for (int i = 0; i < p.size(); i++)
-	{
-		//cout << "p_n = " << i << endl;
-		for (int j = 0; j < t.size(); j++)
-		{
-			//cout << "t_n = " << j << endl;
-			for (int z = 0; z < n.size(); z++)
-			{
-				vertices[count].position = p[i];
-				vertices[count].texcoord = t[j];
-				vertices[count].normal = n[z];
-				count++;
-			}
-		}
-	}
-	/*
-	int vTable = { {{-1}} };
-	int id = 0; // 
-	vTable[p][t][n] = id; // id == number of vertex
-	vertices.push_back(vertex);
-	*/
-
-	
 }
 
 // get the vertexIndices
@@ -335,27 +269,10 @@ bool TriangleMesh::LoadFromFile(const std::string& filePath, const bool normaliz
 				}
 				count++;
 			}
-			row++;
-			if (!(row % 1000))
-			{
-				cout << "row = " << row  << endl;
-			}
-			//vertexIndices.push_back(unsigned(get_f_p(f[0]) - 1));
-			//vertexIndices.push_back(unsigned(get_f_p(f[1]) - 1));
-			//vertexIndices.push_back(unsigned(get_f_p(f[2]) - 1));
-			//int last = 2;
-			//for (int i = 0; i < f.size()-3; i++)
-			//{
-			//	vertexIndices.push_back(unsigned(get_f_p(f[0]) - 1));
-			//	vertexIndices.push_back(unsigned(get_f_p(f[last]) - 1));
-			//	vertexIndices.push_back(unsigned(get_f_p(f[last+1]) - 1));
-			//	last++;
-			//}
 		}
 	}
 	file.close();
 
-	//v_table = vector <vector<vector<short> > >(v.size(), vector<vector<short> >(vt.size(), vector<short>(vn.size(), -1)));
 	get_face_data(v_table, f, v, vt, vn);
 	numVertices = vertices.size();
 	numVertexIndices = vertexIndices.size();
